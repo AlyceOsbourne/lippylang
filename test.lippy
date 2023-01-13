@@ -1,0 +1,55 @@
+var x = 1;
+var y = 2;
+fn add(x, y) {
+    return x + (y) => {
+        return 10 + y;
+    };
+}
+fn sub(x, y) {
+    return x - y;
+}
+fn mul(x, y) {
+    return x * y;
+}
+fn div(x, y) {
+    return x / y;
+}
+fn mod(x, y) {
+    return x % y;
+}
+fn pow(x, y) {
+    return x ** y;
+}
+fn eq(x, y) {
+    return x == y;
+}
+fn neq(x, y) {
+    return x != y;
+}
+fn gt(x, y) {
+    return x > y;
+}
+fn lt(x, y) {
+    return x < y;
+}
+fn gte(x, y) {
+    return x >= y;
+}
+fn lte(x, y) {
+    return x <= y;
+}
+fn and(x, y) {
+    return x && y;
+}
+fn or(x, y) {
+    return x || y;
+}
+fn not(x) {
+    return !x;
+}
+fn inc(x) {
+    return x++;
+}
+fn dec(x) {
+    return x--;
+}
