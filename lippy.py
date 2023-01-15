@@ -15,7 +15,7 @@ class LippyTokens(tokenizer.TokenType):
     __ignored_tokens__ = ("WHITESPACE", "COMMENT")
     COMMENT = rf"({'|'.join((re.escape(c) for c in single_line_comment_chars))}).*" if single_line_comment_chars else ''  # noqa
     KEYWORD = rf"({'|'.join((re.escape(k) for k in keywords))})(?=\s|$)" if keywords else ''  # noqa
-    NUMBER = r"(\d+(\.\d+)?)"
+    NUMBER = r"(\d+(\.\d+)?([eE][+-]?\d+)?([jJ])?)"
     STRING = r"(\"[^\"]*\")"
     IDENTIFIER = r"[a-zA-Z0-9_][a-zA-Z0-9_]*"
     BRACKET = r"[\[\]\(\)\{\}]"
@@ -24,24 +24,6 @@ class LippyTokens(tokenizer.TokenType):
     WHITESPACE = r"\s+"
 
 
-class ASTNode(node.Node, metaclass = abc.ABCMeta): ...
-
-
-class Statement(ASTNode, metaclass = abc.ABCMeta): ...
-
-
-class Expression(ASTNode, metaclass = abc.ABCMeta): ...
-
-
-class Program(ASTNode):
-    def __init__(self, *body):
-        super().__init__(children = body)
-
-
-if __name__ == "__main__":
-    with open("test.lippy") as f:
-        code = f.read()
-    tokens = LippyTokens.lex_tokens(code)
-    for token in tokens:
-        print(token)
-
+def program(file_path = "<stdin>", **kwargs):
+    kwargs.update({'file_path': file_path})
+    return type("Program", (node.Node,), kwargs)
